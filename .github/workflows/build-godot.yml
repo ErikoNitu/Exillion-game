@@ -57,7 +57,12 @@ mac:
     paths:
       - build/mac
 
+# Event triggers for GitLab CI
 # This will trigger on any push or pull request to any branch
-trigger:
-  - push
-  - pull_request
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
