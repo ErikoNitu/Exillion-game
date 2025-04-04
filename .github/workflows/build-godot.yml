@@ -27,6 +27,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Download Godot Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.4.1.stable
+          curl -L https://downloads.tuxfamily.org/godotengine/4.4.1/export_templates/godot_export_templates_4.4.1.stable.zip -o godot_export_templates.zip
+          unzip godot_export_templates.zip -d ~/.local/share/godot/export_templates/4.4.1.stable
+          rm godot_export_templates.zip
       - name: Export Linux Build
         run: |
           mkdir -v -p build/linux
@@ -46,6 +52,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Download Godot Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.4.1.stable
+          curl -L https://downloads.tuxfamily.org/godotengine/4.4.1/export_templates/godot_export_templates_4.4.1.stable.zip -o godot_export_templates.zip
+          unzip godot_export_templates.zip -d ~/.local/share/godot/export_templates/4.4.1.stable
+          rm godot_export_templates.zip
       - name: Export Windows Build
         run: |
           mkdir -v -p build/windows
@@ -65,6 +77,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Download Godot Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.4.1.stable
+          curl -L https://downloads.tuxfamily.org/godotengine/4.4.1/export_templates/godot_export_templates_4.4.1.stable.zip -o godot_export_templates.zip
+          unzip godot_export_templates.zip -d ~/.local/share/godot/export_templates/4.4.1.stable
+          rm godot_export_templates.zip
       - name: Export macOS Build
         run: |
           mkdir -v -p build/mac
