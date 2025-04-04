@@ -57,3 +57,7 @@ mac:
     paths:
       - build/mac
 
+# This will trigger on any push or pull request to any branch
+trigger:
+  - push
+  - pull_request
