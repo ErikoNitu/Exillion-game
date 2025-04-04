@@ -1,4 +1,4 @@
-name: "Godot Build & Export - Linuxt"
+name: "Godot Build & Export - Linux"
 on: push
 
 env:
