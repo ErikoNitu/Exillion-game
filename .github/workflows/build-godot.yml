@@ -40,7 +40,7 @@ jobs:
           path: build/linux
 
   export-windows:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci
     needs: import-assets
@@ -60,7 +60,7 @@ jobs:
           path: build/windows
 
   export-mac:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci
     needs: import-assets
