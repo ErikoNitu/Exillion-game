@@ -1,64 +1,5 @@
-mage: barichello/godot-ci
+name: Build and Export Godot Project
 
-# Cache imported assets between runs
-cache:
-  key: import-assets
-  paths:
-    - .godot/imported/
-
-stages:
-  - import-assets
-  - export
-  - deploy
-
-variables:
-  EXPORT_NAME: build-project
-  PROJECT_PATH: .
-
-# Open the editor to import assets in case the cache was empty or outdated
-import-assets:
-  stage: import-assets
-  script:
-    - godot --headless --verbose --editor --quit
-
-linux:
-  stage: export
-  script:
-    - mkdir -v -p build/linux
-    - EXPORT_DIR="$(readlink -f build)"
-    - cd $PROJECT_PATH
-    - godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
-  artifacts:
-    name: $EXPORT_NAME-$CI_JOB_NAME
-    paths:
-      - build/linux
-
-windows:
-  stage: export
-  script:
-    - mkdir -v -p build/windows
-    - EXPORT_DIR="$(readlink -f build)"
-    - cd $PROJECT_PATH
-    - godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
-  artifacts:
-    name: $EXPORT_NAME-$CI_JOB_NAME
-    paths:
-      - build/windows
-
-mac:
-  stage: export
-  script:
-    - mkdir -v -p build/mac
-    - EXPORT_DIR="$(readlink -f build)"
-    - cd $PROJECT_PATH
-    - godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
-  artifacts:
-    name: $EXPORT_NAME-$CI_JOB_NAME
-    paths:
-      - build/mac
-
-# Event triggers for GitLab CI
-# This will trigger on any push or pull request to any branch
 on:
   push:
     branches:
@@ -66,3 +7,66 @@ on:
   pull_request:
     branches:
       - "*"
+
+jobs:
+  import-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Import assets (Godot editor)
+        run: godot --headless --verbose --editor --quit
+
+  export-linux:
+    runs-on: ubuntu-latest
+    needs: import-assets
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Export Linux Build
+        run: |
+          mkdir -v -p build/linux
+          EXPORT_DIR="$(pwd)/build"
+          cd ${{ github.workspace }}
+          godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/${{ secrets.EXPORT_NAME }}.x86_64"
+      - name: Upload Linux Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ secrets.EXPORT_NAME }}-linux
+          path: build/linux
+
+  export-windows:
+    runs-on: windows-latest
+    needs: import-assets
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Export Windows Build
+        run: |
+          mkdir -v -p build/windows
+          EXPORT_DIR="$(pwd)/build"
+          cd ${{ github.workspace }}
+          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/${{ secrets.EXPORT_NAME }}.exe"
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ secrets.EXPORT_NAME }}-windows
+          path: build/windows
+
+  export-mac:
+    runs-on: macos-latest
+    needs: import-assets
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Export macOS Build
+        run: |
+          mkdir -v -p build/mac
+          EXPORT_DIR="$(pwd)/build"
+          cd ${{ github.workspace }}
+          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/${{ secrets.EXPORT_NAME }}.zip"
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ secrets.EXPORT_NAME }}-mac
+          path: build/mac
