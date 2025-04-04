@@ -11,6 +11,8 @@ on:
 jobs:
   import-assets:
     runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
