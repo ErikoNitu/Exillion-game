@@ -21,6 +21,8 @@ jobs:
 
   export-linux:
     runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci
     needs: import-assets
     steps:
       - name: Checkout code
@@ -39,6 +41,8 @@ jobs:
 
   export-windows:
     runs-on: windows-latest
+    container:
+      image: barichello/godot-ci
     needs: import-assets
     steps:
       - name: Checkout code
@@ -57,6 +61,8 @@ jobs:
 
   export-mac:
     runs-on: macos-latest
+    container:
+      image: barichello/godot-ci
     needs: import-assets
     steps:
       - name: Checkout code
