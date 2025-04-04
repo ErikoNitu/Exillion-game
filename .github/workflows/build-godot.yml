@@ -1,28 +1,59 @@
-name: Build Godot Project
+mage: barichello/godot-ci
 
-on:
-  push: {}
-  pull_request: {}
+# Cache imported assets between runs
+cache:
+  key: import-assets
+  paths:
+    - .godot/imported/
 
-jobs:
-  Godot:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: [linux, windows, mac]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          lfs: true
-      - name: Build
-        id: build
-        uses: manleydev/build-godot-action@v1.4.1
-        with:
-          name: example
-          preset: ${{ matrix.platform }}
-          debugMode: "true"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: Client - ${{ matrix.platform }}
-          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
+stages:
+  - import-assets
+  - export
+  - deploy
+
+variables:
+  EXPORT_NAME: build-project
+  PROJECT_PATH: .
+
+# Open the editor to import assets in case the cache was empty or outdated
+import-assets:
+  stage: import-assets
+  script:
+    - godot --headless --verbose --editor --quit
+
+linux:
+  stage: export
+  script:
+    - mkdir -v -p build/linux
+    - EXPORT_DIR="$(readlink -f build)"
+    - cd $PROJECT_PATH
+    - godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/linux
+
+windows:
+  stage: export
+  script:
+    - mkdir -v -p build/windows
+    - EXPORT_DIR="$(readlink -f build)"
+    - cd $PROJECT_PATH
+    - godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/windows
+
+mac:
+  stage: export
+  script:
+    - mkdir -v -p build/mac
+    - EXPORT_DIR="$(readlink -f build)"
+    - cd $PROJECT_PATH
+    - godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/mac
+
