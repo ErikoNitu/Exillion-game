@@ -15,7 +15,7 @@ jobs:
       image: barichello/godot-ci
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Import assets (Godot editor)
         run: godot --headless --verbose --editor --quit
 
@@ -24,7 +24,7 @@ jobs:
     needs: import-assets
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Export Linux Build
         run: |
           mkdir -v -p build/linux
@@ -32,7 +32,7 @@ jobs:
           cd ${{ github.workspace }}
           godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/${{ secrets.EXPORT_NAME }}.x86_64"
       - name: Upload Linux Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ secrets.EXPORT_NAME }}-linux
           path: build/linux
@@ -42,7 +42,7 @@ jobs:
     needs: import-assets
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Export Windows Build
         run: |
           mkdir -v -p build/windows
@@ -50,7 +50,7 @@ jobs:
           cd ${{ github.workspace }}
           godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/${{ secrets.EXPORT_NAME }}.exe"
       - name: Upload Windows Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ secrets.EXPORT_NAME }}-windows
           path: build/windows
@@ -60,7 +60,7 @@ jobs:
     needs: import-assets
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Export macOS Build
         run: |
           mkdir -v -p build/mac
@@ -68,7 +68,7 @@ jobs:
           cd ${{ github.workspace }}
           godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/${{ secrets.EXPORT_NAME }}.zip"
       - name: Upload macOS Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ secrets.EXPORT_NAME }}-mac
           path: build/mac
