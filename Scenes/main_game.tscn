@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b1p6axltyb5mj"]
 
-[ext_resource type="Script" uid="uid://cyfahtxl0t3om" path="res://Scripts/main_game.gd" id="1_bb2iq"]
+[ext_resource type="Script" path="res://Scripts/main_game.gd" id="1_bb2iq"]
 [ext_resource type="PackedScene" uid="uid://lbtdso8tvltf" path="res://Scenes/wizard.tscn" id="1_l756w"]
 [ext_resource type="Script" uid="uid://b3nn8umwbaup4" path="res://Scripts/wizard.gd" id="2_mgc0q"]
 [ext_resource type="Texture2D" uid="uid://b3yhwlduw0piu" path="res://Assets/Final/Tiles.png" id="2_pu3va"]
@@ -422,6 +422,9 @@ layer_0/tile_data = PackedInt32Array(0, 262144, 1, 1, 327680, 1, 2, 262144, 1, 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(80, -5)
+
+[node name="Death2" parent="." instance=ExtResource("3_0e3vx")]
+position = Vector2(138, -18)
 
 [node name="Death" parent="." instance=ExtResource("3_0e3vx")]
 position = Vector2(212, -18)
