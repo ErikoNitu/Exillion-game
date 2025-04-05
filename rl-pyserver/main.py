@@ -78,13 +78,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                             
                             if state.get("reset"):
                                 reward = state.get("score", 0.0)
-                                # End of episode update: use last transition with negative reward if desired
-                                if prev_state is not None:
-                                    agent.remember(prev_state, prev_target, -10, flatten_state(state), True)
-                                    loss = agent.replay()
-                                    episode += 1
-                                    agent.track_progress(-10, loss, episode)
-                                prev_state = None
+                                # # End of episode update: use last transition with negative reward if desired
+                                # if prev_state is not None:
+                                #     agent.remember(prev_state, prev_target, -10, flatten_state(state), True)
+                                #     loss = agent.replay()
+                                #     episode += 1
+                                #     agent.track_progress(-10, loss, episode)
+                                # prev_state = None
                             else:
                                 state_vec = flatten_state(state)
                                 # Ground truth direction is provided in the state
@@ -96,6 +96,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                                 action_dict = {"projectile_direction": predicted_direction}
                                 print(action_dict)
                                 conn.sendall((json.dumps(action_dict) + "\n").encode("utf-8"))
+
+                                prev_state = state_vec
+                                prev_target = target_direction
                                 
                                 if prev_state is not None:
                                     # Here we use a reward from the game, for example 1 for a "good" shot.

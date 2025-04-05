@@ -55,6 +55,7 @@ class RLAgent:
         
         batch = random.sample(self.memory, batch_size)
         total_loss = 0
+        # print("Batch:", batch)
         for state, action, reward, next_state, done in batch:
             state_tensor = torch.FloatTensor(state)
             # Our target here is the ground-truth continuous action (direction)
