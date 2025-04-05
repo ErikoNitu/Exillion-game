@@ -1,7 +1,8 @@
-[gd_scene load_steps=41 format=3 uid="uid://lbtdso8tvltf"]
+[gd_scene load_steps=50 format=3 uid="uid://lbtdso8tvltf"]
 
 [ext_resource type="Texture2D" uid="uid://d3gyik0a68khd" path="res://Assets/EVil Wizard 2/Sprites/Attack1.png" id="1_be21u"]
 [ext_resource type="Texture2D" uid="uid://be4smjahwh40s" path="res://Assets/EVil Wizard 2/Sprites/Idle.png" id="1_byqed"]
+[ext_resource type="Texture2D" uid="uid://83d6lwt7d61v" path="res://Assets/EVil Wizard 2/Sprites/Attack2.png" id="2_sask2"]
 [ext_resource type="Texture2D" uid="uid://bd8rlvqmyfi2m" path="res://Assets/EVil Wizard 2/Sprites/Jump.png" id="3_sask2"]
 [ext_resource type="Texture2D" uid="uid://d1by4vmlihecg" path="res://Assets/EVil Wizard 2/Sprites/Run.png" id="4_vxkga"]
 [ext_resource type="PackedScene" uid="uid://bawjat6xwcac5" path="res://Scenes/player_attack.tscn" id="5_be21u"]
@@ -102,6 +103,38 @@ region = Rect2(1500, 0, 250, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2doy0"]
 atlas = ExtResource("1_be21u")
+region = Rect2(1750, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qctp"]
+atlas = ExtResource("2_sask2")
+region = Rect2(0, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fimyo"]
+atlas = ExtResource("2_sask2")
+region = Rect2(250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ug6ff"]
+atlas = ExtResource("2_sask2")
+region = Rect2(500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5oo2"]
+atlas = ExtResource("2_sask2")
+region = Rect2(750, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46oxg"]
+atlas = ExtResource("2_sask2")
+region = Rect2(1000, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yfns"]
+atlas = ExtResource("2_sask2")
+region = Rect2(1250, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1cvq"]
+atlas = ExtResource("2_sask2")
+region = Rect2(1500, 0, 250, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7aic5"]
+atlas = ExtResource("2_sask2")
 region = Rect2(1750, 0, 250, 250)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilitf"]
@@ -206,6 +239,35 @@ animations = [{
 "loop": false,
 "name": &"bam",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qctp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fimyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ug6ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5oo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46oxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8yfns")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1cvq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7aic5")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -344,8 +406,10 @@ script = SubResource("GDScript_mqqw1")
 texture_filter = 1
 position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_dhse1")
-animation = &"jump"
+animation = &"fire"
 autoplay = "idle"
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 19.5)
@@ -371,5 +435,7 @@ shape = SubResource("CircleShape2D_be21u")
 libraries = {
 &"": SubResource("AnimationLibrary_hou06")
 }
+
+[node name="Fire" type="Node2D" parent="."]
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
