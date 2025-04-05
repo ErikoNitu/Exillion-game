@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cm7b1ivmhu7se"]
+
+[ext_resource type="AudioStream" uid="uid://bwgrabk80usqg" path="res://Assets/Music/fantasy-relaxation-music-111778.mp3" id="1_pu4hd"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_pu4hd")
+autoplay = true
