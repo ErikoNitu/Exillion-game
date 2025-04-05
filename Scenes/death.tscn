@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ky31t7rpcqmw"]
+[gd_scene load_steps=31 format=3 uid="uid://ky31t7rpcqmw"]
 
 [ext_resource type="Texture2D" uid="uid://c84qhe17ypdh1" path="res://Assets/Bringer-Of-Death/SpriteSheet/Bringer-of-Death-SpritSheet.png" id="1_g62mh"]
 [ext_resource type="Script" uid="uid://d2e7ur0av0ajg" path="res://Scripts/death.gd" id="2_mna5k"]
@@ -186,12 +186,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4dtd"]
 size = Vector2(20, 50)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rsl6c"]
-size = Vector2(14, 15)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rsl6c"]
 radius = 15.0
-height = 46.0
+height = 60.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rsl6c"]
 radius = 100.404
@@ -204,20 +201,15 @@ texture_filter = 1
 position = Vector2(0, -19)
 scale = Vector2(0.871429, 1)
 sprite_frames = SubResource("SpriteFrames_rw0p4")
-animation = &"death"
+animation = &"run"
 autoplay = "run"
-frame = 6
-frame_progress = 1.0
+frame_progress = 0.168766
 
 [node name="Killzone" parent="." instance=ExtResource("3_rsl6c")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(1, -5)
 shape = SubResource("RectangleShape2D_u4dtd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 13)
-shape = SubResource("RectangleShape2D_rsl6c")
 
 [node name="RayCastLeft" type="RayCast2D" parent="." groups=["enemy"]]
 position = Vector2(1, 13)
@@ -236,7 +228,7 @@ shape = SubResource("CapsuleShape2D_rsl6c")
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, -4)
+position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_rsl6c")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
