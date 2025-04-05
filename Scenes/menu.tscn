@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://jo2vjonycycr"]
+
+[ext_resource type="Script" uid="uid://c5uu0egxssjgt" path="res://menu.gd" id="1_cayip"]
+[ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="2_158mb"]
+[ext_resource type="Texture2D" uid="uid://csjh1u5rmvahh" path="res://Assets/start_menu.png" id="3_wwsa2"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cayip")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 161.0
+offset_top = 13.0
+offset_right = 387.0
+offset_bottom = 174.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_158mb")
+text = "Start"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_158mb")
+text = "Options"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_158mb")
+text = "Quit"
+
+[node name="StartMenu" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(576, 321)
+scale = Vector2(0.746745, 0.626953)
+texture = ExtResource("3_wwsa2")
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
