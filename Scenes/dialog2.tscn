@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8o656uon6iqp"]
+
+[ext_resource type="Script" uid="uid://b4gnx0f6iiorh" path="res://choices_dialog.gd" id="1_2l8fk"]
+[ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="2_wrvqf"]
+[ext_resource type="Texture2D" uid="uid://bi58ah3qb5xf" path="res://Assets/pixel-text-box.png" id="3_la44h"]
+
+[sub_resource type="GDScript" id="GDScript_irs7l"]
+script/source = "extends Node2D
+
+@onready var choicesDialog: PanelContainer = $\"Choices Dialog\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	# Set the choices array using the setter
+	choicesDialog.set_choices([\"null\", \"The Ocean of Unknown\", \"End battle\"])  # Pass an Array to the setter
+	choicesDialog.visible = true
+
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4uc3s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxi5t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37fld"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_87kay"]
+
+[node name="Dialog" type="Node2D"]
+script = SubResource("GDScript_irs7l")
+
+[node name="Choices Dialog" type="PanelContainer" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(600, 120)
+offset_right = 727.0
+offset_bottom = 100.0
+script = ExtResource("1_2l8fk")
+
+[node name="MarginContainer" type="MarginContainer" parent="Choices Dialog"]
+z_index = 2
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Choices" type="VBoxContainer" parent="Choices Dialog/MarginContainer"]
+z_index = 3
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Button" type="Button" parent="Choices Dialog/MarginContainer/Choices"]
+z_index = 4
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wrvqf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4uc3s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rxi5t")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_37fld")
+
+[node name="Button2" type="Button" parent="Choices Dialog/MarginContainer/Choices"]
+z_index = 4
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wrvqf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4uc3s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rxi5t")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_37fld")
+
+[node name="Label" type="Label" parent="Choices Dialog"]
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(50, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wrvqf")
+text = "Choose your faith"
+label_settings = SubResource("LabelSettings_87kay")
+horizontal_alignment = 2
+
+[node name="Pixel-text-box" type="Sprite2D" parent="Choices Dialog"]
+z_index = -3
+texture_filter = 1
+position = Vector2(369.875, 58.8438)
+scale = Vector2(1.49046, 0.85328)
+texture = ExtResource("3_la44h")
