@@ -1105,6 +1105,7 @@ visibility_layer = 7
 position = Vector2(-186, 39)
 
 [node name="Heal2" parent="." instance=ExtResource("21_nl0we")]
+position = Vector2(-385, -8)
 
 [node name="Heal3" parent="." instance=ExtResource("21_nl0we")]
 position = Vector2(2688, -300)

@@ -12,9 +12,10 @@ script/source = "extends CharacterBody2D
 
 signal healthChanged
 
-const SPEED = 230.0
-const JUMP_VELOCITY = -400.0
+@onready var SPEED = 230.0
+const JUMP_VELOCITY = -500.0
 
+@onready var my_timer: Timer = $MyTimer
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var energy_ball_scene: PackedScene = preload(\"res://Scenes/void.tscn\")
@@ -24,6 +25,7 @@ var energy_ball_scene: PackedScene = preload(\"res://Scenes/void.tscn\")
 
 var is_attacking = false
 var is_firing = false
+var stop_time = false
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_animation_finished)
@@ -54,6 +56,14 @@ func _physics_process(delta: float) -> void:
 		healthChanged.emit(currentHalth)
 		animated_sprite.play(\"fire\")
 		shoot_projectile()
+	if Input.is_action_just_pressed(\"time_stop\") and currentHalth > 3:
+		Engine.time_scale = 0.5	
+		SPEED = 460
+		my_timer.wait_time = 2.0
+		my_timer.one_shot = true
+		my_timer.start()
+		currentHalth -= 3
+		healthChanged.emit(currentHalth)
 	elif not is_attacking and not is_firing:
 		# Only play other animations if not attacking
 		if not is_on_floor():
@@ -88,15 +98,16 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if area.name == \"Killzone\":
 		currentHalth -= 1
 		if currentHalth < 0:
+			Engine.time_scale = 1.0
+			SPEED = 230
 			get_tree().reload_current_scene()
 		healthChanged.emit(currentHalth)
 	if area.has_method(\"collect\"):
 		area.collect()
-		if currentHalth < maxHealth:
-			currentHalth += 3
+		currentHalth += 3
+		if currentHalth > maxHealth:
+			currentHalth = maxHealth
 		healthChanged.emit(currentHalth)
-		
-
 func shoot_projectile() -> void:
 	if energy_ball_scene == null:
 		return
@@ -104,6 +115,11 @@ func shoot_projectile() -> void:
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position
 	projectile.direction = 1 if not animated_sprite.flip_h else -1
+
+
+func _on_my_timer_timeout() -> void:
+	Engine.time_scale = 1.0
+	SPEED = 230
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dhse1"]
@@ -473,4 +489,7 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="MyTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="MyTimer" to="." method="_on_my_timer_timeout"]
