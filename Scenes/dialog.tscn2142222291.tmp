@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dox6ly2t4x17j"]
+
+[ext_resource type="Script" uid="uid://y0jj1sctpmus" path="res://dialog.gd" id="1_edf0l"]
+[ext_resource type="Script" uid="uid://b4gnx0f6iiorh" path="res://choices_dialog.gd" id="2_87kay"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4uc3s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rxi5t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_37fld"]
+
+[node name="Dialog" type="Node2D"]
+script = ExtResource("1_edf0l")
+
+[node name="Choices Dialog" type="PanelContainer" parent="."]
+z_index = 3
+custom_minimum_size = Vector2(1000, 100)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_87kay")
+
+[node name="MarginContainer" type="MarginContainer" parent="Choices Dialog"]
+z_index = 2
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Choices" type="VBoxContainer" parent="Choices Dialog/MarginContainer"]
+z_index = 2
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Choices Dialog/MarginContainer/Choices"]
+z_index = 2
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4uc3s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_rxi5t")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_37fld")
