@@ -28,6 +28,7 @@ var is_firing = false
 var stop_time = false
 
 func _ready():
+	Engine.time_scale = 1
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
