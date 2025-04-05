@@ -52,10 +52,10 @@ func onChoice(choice_index):
 	# Load different scenes based on the button pressed
 	if choice_index == 1:
 		print("Loading scene 1...")
-		get_tree().change_scene_to_file("C:/Users/User1/Desktop/joc godot/joc/Scenes/map_level_2.tscn")  # Replace with actual scene path
+		get_tree().change_scene_to_file("res://Scenes/map_level_3.tscn")  # Replace with actual scene path
 	elif choice_index == 2:
 		print("Loading scene 2...")
-		get_tree().change_scene_to_file("C:/Users/User1/Desktop/joc godot/joc/Scenes/map_level_3.tscn")  # Replace with actual scene path
+		get_tree().change_scene_to_file("res://Scenes/map_level_4.tscn")  # Replace with actual scene path
 
 func show_dialog():
 	print("Showing dialog")  # Debug

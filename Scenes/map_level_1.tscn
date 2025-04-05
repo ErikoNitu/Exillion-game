@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bgh8l05jco16k"]
+[gd_scene load_steps=34 format=4 uid="uid://bgh8l05jco16k"]
 
 [ext_resource type="Texture2D" uid="uid://dpa0i38kvypji" path="res://Assets/background/background_layer_1.png" id="1_tflim"]
 [ext_resource type="Texture2D" uid="uid://lci7hpgi8yu7" path="res://Assets/background/background_layer_2.png" id="2_au6gf"]
@@ -17,22 +17,26 @@
 [ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="15_djqc3"]
 [ext_resource type="PackedScene" uid="uid://lbtdso8tvltf" path="res://Scenes/wizard.tscn" id="16_f0osq"]
 [ext_resource type="PackedScene" uid="uid://dox6ly2t4x17j" path="res://Scenes/dialog.tscn" id="18_87lrj"]
+[ext_resource type="PackedScene" uid="uid://cfvyxqq7egilk" path="res://Scenes/health_container.tscn" id="18_m8cta"]
 
 [sub_resource type="GDScript" id="GDScript_pebbn"]
 script/source = "extends Node2D
 
 @onready var dialog: Node2D = $Dialog
 @onready var choices_dialog: PanelContainer = $\"Choices Dialog\"
+@onready var health_container: HBoxContainer = $CanvasLayer/healthContainer
+@onready var wizard: CharacterBody2D = $Wizard
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	health_container.setMaxHearts(wizard.maxHealth)
+	health_container.updateHearts(wizard.currentHalth)
+	wizard.healthChanged.connect(health_container.updateHearts)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print(\"ceva\")
@@ -1031,9 +1035,6 @@ text = "As I said, nothing is impossible."
 label_settings = SubResource("LabelSettings_6k85l")
 autowrap_mode = 1
 
-[node name="Wizard" parent="." instance=ExtResource("16_f0osq")]
-position = Vector2(2676, -397)
-
 [node name="Dialog" parent="." instance=ExtResource("18_87lrj")]
 visible = false
 position = Vector2(2179, -540)
@@ -1046,6 +1047,16 @@ script = SubResource("GDScript_au6gf")
 z_index = -1
 position = Vector2(396, 199.75)
 shape = SubResource("RectangleShape2D_au6gf")
+
+[node name="Wizard" parent="." instance=ExtResource("16_f0osq")]
+z_index = 1
+position = Vector2(2673, -361)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="healthContainer" parent="CanvasLayer" instance=ExtResource("18_m8cta")]
+offset_top = 1.0
+offset_bottom = 46.0
 
 [connection signal="body_entered" from="Dialog/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Dialog/Area2D" to="." method="_on_area_2d_body_exited"]

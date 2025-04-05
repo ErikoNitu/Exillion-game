@@ -413,7 +413,6 @@ script = ExtResource("1_bb2iq")
 [node name="Wizard" parent="." instance=ExtResource("1_l756w")]
 position = Vector2(59, -63)
 script = ExtResource("2_mgc0q")
-maxHealth = 10
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_6j5ir")
