@@ -1,10 +1,15 @@
 extends CharacterBody2D
 
+signal healthChanged
+
 const SPEED = 230.0
 const JUMP_VELOCITY = -400.0
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+@export var maxHealth = 10
+@onready var currentHalth: int = maxHealth
 var is_attacking = false
 
 func _ready():
@@ -24,6 +29,10 @@ func _physics_process(delta: float) -> void:
 	# Attack
 	if Input.is_action_just_pressed("attack_melee") and not is_attacking:
 		is_attacking = true
+		if animated_sprite.flip_h == false:
+			animation_player.play("attack_melee")
+		else:
+			animation_player.play("attack_melee_right")
 		animated_sprite.play("bam")
 	elif not is_attacking:
 		# Only play other animations if not attacking
@@ -52,3 +61,10 @@ func _on_animation_finished():
 	# Only reset if we were attacking
 	if is_attacking:
 		is_attacking = false
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if area.name == "Killzone":
+		currentHalth -= 1
+		if currentHalth < 0:
+			get_tree().reload_current_scene()
+		healthChanged.emit(currentHalth)
