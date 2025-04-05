@@ -15,19 +15,12 @@ var direction: int = -1
 var is_dying: bool = false
 var can_shoot: bool = true
 
-var client: StreamPeerTCP = StreamPeerTCP.new()
 var connected: bool = false
 var host: String = "127.0.0.1"
 var port: int = 4004
 
 func _ready() -> void:
 	Engine.time_scale = 2.0
-	var err = client.connect_to_host(host, port)
-	if err == OK:
-		print("Connected to Python server!")
-		connected = true
-	else:
-		print("Failed to connect to Python server! Error code: ", err)
 	detection_area.area_entered.connect(_on_detection_area_body_entered)
 
 func _physics_process(delta: float) -> void:
@@ -66,6 +59,14 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 		can_shoot = true
 
 func shoot_projectile() -> void:
+	var client: StreamPeerTCP = StreamPeerTCP.new()
+	var err = client.connect_to_host(host, port)
+	if err == OK:
+		print("Connected to Python server!")
+		connected = true
+	else:
+		print("Failed to connect to Python server! Error code: ", err)
+
 	if projectile_scene == null:
 		return
 		
@@ -97,6 +98,8 @@ func shoot_projectile() -> void:
 		# Wait briefly to allow the server to respond
 		# (In a real-time game you might run this in a coroutine or check repeatedly)
 		var available = client.get_available_bytes()
+		while available == 0:
+			available = client.get_available_bytes()
 		if available > 0:
 			var received_str = client.get_utf8_string(available)
 			# We assume the response ends with a newline
@@ -121,11 +124,15 @@ func shoot_projectile() -> void:
 					print("Error parsing response JSON:", parse_error)
 					projectile.direction = base_dir
 			else:
+				print("not here?")
 				# No complete message yet; fallback to base direction
 				projectile.direction = base_dir
 		else:
+			print("not available yet")
 			# If no response is available, use the base direction
 			projectile.direction = base_dir
+			
+	client.disconnect_from_host()
 
 func generate_random_direction() -> Vector2:
 	# Generate a random angle in radians between 0 and 2π
