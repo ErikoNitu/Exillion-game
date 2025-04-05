@@ -1,3 +1,14 @@
-[gd_scene format=3 uid="uid://bxl2n4bv1655t"]
+[gd_scene load_steps=2 format=3 uid="uid://bxl2n4bv1655t"]
+
+[ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="1_x1s8w"]
 
 [node name="map_level_3" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 467.0
+offset_top = 296.0
+offset_right = 671.0
+offset_bottom = 319.0
+theme_override_fonts/font = ExtResource("1_x1s8w")
+text = "Comming soon ..."

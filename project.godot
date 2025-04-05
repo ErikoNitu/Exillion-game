@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="joc"
-run/main_scene="uid://bgh8l05jco16k"
+run/main_scene="uid://jo2vjonycycr"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 BackgroundMusic="*res://Scenes/background_music.tscn"
+Global="*res://Global.gd"
 
 [input]
 
