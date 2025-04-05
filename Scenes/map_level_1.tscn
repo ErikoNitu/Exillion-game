@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bgh8l05jco16k"]
+[gd_scene load_steps=39 format=4 uid="uid://bgh8l05jco16k"]
 
 [ext_resource type="Texture2D" uid="uid://dpa0i38kvypji" path="res://Assets/background/background_layer_1.png" id="1_tflim"]
 [ext_resource type="Texture2D" uid="uid://lci7hpgi8yu7" path="res://Assets/background/background_layer_2.png" id="2_au6gf"]
@@ -18,6 +18,9 @@
 [ext_resource type="PackedScene" uid="uid://lbtdso8tvltf" path="res://Scenes/wizard.tscn" id="16_f0osq"]
 [ext_resource type="PackedScene" uid="uid://dox6ly2t4x17j" path="res://Scenes/dialog.tscn" id="18_87lrj"]
 [ext_resource type="PackedScene" uid="uid://cfvyxqq7egilk" path="res://Scenes/health_container.tscn" id="18_m8cta"]
+[ext_resource type="PackedScene" uid="uid://b0kqwvvvllhf3" path="res://Scenes/deathzone.tscn" id="19_m8cta"]
+[ext_resource type="PackedScene" uid="uid://dechtpdkcdtfo" path="res://Scenes/flying_fuck.tscn" id="20_yibsj"]
+[ext_resource type="PackedScene" uid="uid://qjlvv6bdcel3" path="res://Scenes/heal.tscn" id="21_nl0we"]
 
 [sub_resource type="GDScript" id="GDScript_pebbn"]
 script/source = "extends Node2D
@@ -46,6 +49,10 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	print(\"ceva\")
 	dialog.visible = 0;
 	
+
+
+func _on_deathzone_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pebbn"]
@@ -550,6 +557,7 @@ texture = ExtResource("5_yibsj")
 texture_region_size = Vector2i(24, 24)
 0:0/size_in_atlas = Vector2i(32, 2)
 0:0/0 = 0
+0:0/0/z_index = 4
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ym36"]
 texture = ExtResource("5_yibsj")
@@ -731,6 +739,11 @@ script/source = "extends Area2D
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au6gf"]
 size = Vector2(19, 55.5)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yibsj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8cta"]
+size = Vector2(766, 15)
 
 [node name="Map_Level1" type="Node2D"]
 script = SubResource("GDScript_pebbn")
@@ -1050,7 +1063,7 @@ shape = SubResource("RectangleShape2D_au6gf")
 
 [node name="Wizard" parent="." instance=ExtResource("16_f0osq")]
 z_index = 1
-position = Vector2(2673, -361)
+position = Vector2(232, -113)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1058,5 +1071,51 @@ position = Vector2(2673, -361)
 offset_top = 1.0
 offset_bottom = 46.0
 
+[node name="deathzone" parent="." instance=ExtResource("19_m8cta")]
+z_index = 1
+position = Vector2(1546, 394)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
+position = Vector2(411, 221)
+shape = SubResource("WorldBoundaryShape2D_yibsj")
+
+[node name="lava_death" parent="." instance=ExtResource("19_m8cta")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lava_death"]
+z_index = 1
+position = Vector2(2772, 447.5)
+shape = SubResource("RectangleShape2D_m8cta")
+
+[node name="Flying_fuck" parent="." instance=ExtResource("20_yibsj")]
+z_index = 1
+position = Vector2(-3, -76)
+
+[node name="Flying_fuck2" parent="." instance=ExtResource("20_yibsj")]
+position = Vector2(1116, -326)
+
+[node name="Flying_fuck3" parent="." instance=ExtResource("20_yibsj")]
+position = Vector2(2019, -223)
+
+[node name="Flying_fuck4" parent="." instance=ExtResource("20_yibsj")]
+position = Vector2(2777, 163)
+
+[node name="Heal" parent="." instance=ExtResource("21_nl0we")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(-186, 39)
+
+[node name="Heal2" parent="." instance=ExtResource("21_nl0we")]
+
+[node name="Heal3" parent="." instance=ExtResource("21_nl0we")]
+position = Vector2(2688, -300)
+
+[node name="Heal4" parent="." instance=ExtResource("21_nl0we")]
+position = Vector2(2406, 371)
+
+[node name="Heal5" parent="." instance=ExtResource("21_nl0we")]
+position = Vector2(1436, -299)
+
 [connection signal="body_entered" from="Dialog/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Dialog/Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="area_entered" from="deathzone" to="." method="_on_deathzone_area_entered"]
+[connection signal="area_entered" from="deathzone" to="deathzone" method="_on_area_entered"]

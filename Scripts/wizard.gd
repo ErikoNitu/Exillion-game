@@ -80,6 +80,8 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		if currentHalth < 0:
 			get_tree().reload_current_scene()
 		healthChanged.emit(currentHalth)
+	if area.has_method("collect"):
+		area.collect()
 
 func shoot_projectile() -> void:
 	if energy_ball_scene == null:
