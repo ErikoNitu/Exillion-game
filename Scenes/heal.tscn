@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://qjlvv6bdcel3"]
+
+[ext_resource type="Script" uid="uid://fokmxk7l83eq" path="res://Scripts/heal.gd" id="1_vfgpi"]
+[ext_resource type="Texture2D" uid="uid://dqbhu3dbkj0xx" path="res://Assets/potions/PotionsPack1.png" id="2_weqha"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6d0i5"]
+size = Vector2(23, 24)
+
+[node name="Heal" type="Area2D"]
+script = ExtResource("1_vfgpi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -2)
+shape = SubResource("RectangleShape2D_6d0i5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -2)
+texture = ExtResource("2_weqha")
