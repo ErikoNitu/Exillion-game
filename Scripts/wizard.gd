@@ -2,12 +2,13 @@ extends CharacterBody2D
 
 signal healthChanged
 
+
 const SPEED = 230.0
 const JUMP_VELOCITY = -400.0
-
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var energy_ball_scene: PackedScene = preload("res://Scenes/void.tscn")
+
 
 @export var maxHealth = 10
 @onready var currentHalth: int = maxHealth
@@ -17,6 +18,7 @@ var is_firing = false
 
 func _ready():
 	animated_sprite.animation_finished.connect(_on_animation_finished)
+	print(Global.fireball)
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -29,7 +31,8 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_axis("move_left", "move_right")
 	# Attack
-	if Input.is_action_just_pressed("attack_melee") and not is_attacking and currentHalth > 1:
+	if Input.is_action_just_pressed("attack_melee") and not is_attacking and currentHalth > 1 and Global.wand == 1:
+		print(get_node("Shop").fireball)
 		is_attacking = true
 		currentHalth -= 1
 		healthChanged.emit(currentHalth)
@@ -38,7 +41,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			animation_player.play("attack_melee_right")
 		animated_sprite.play("bam")
-	if Input.is_action_just_pressed("fire") and currentHalth > 2:
+	if Input.is_action_just_pressed("fire") and currentHalth > 2 and Global.fireball == 1:
 		is_firing = true
 		currentHalth -= 2
 		healthChanged.emit(currentHalth)
