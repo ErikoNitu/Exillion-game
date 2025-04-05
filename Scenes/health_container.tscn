@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfvyxqq7egilk"]
+
+[ext_resource type="Script" uid="uid://dbcjajjygwxk8" path="res://Scripts/health_container.gd" id="1_m610j"]
+
+[node name="healthContainer" type="HBoxContainer"]
+offset_right = 49.0
+offset_bottom = 45.0
+theme_override_constants/separation = 30
+script = ExtResource("1_m610j")

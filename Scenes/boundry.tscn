@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddjttkqd6b2oo"]
+
+[ext_resource type="Script" uid="uid://bm78dl5nkmdjk" path="res://Scripts/boundry.gd" id="1_2ewap"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_de8ur"]
+normal = Vector2(0.0178543, 0.999841)
+distance = -128.696
+
+[node name="Boundry" type="Area2D"]
+position = Vector2(22, 345)
+script = ExtResource("1_2ewap")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_de8ur")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
