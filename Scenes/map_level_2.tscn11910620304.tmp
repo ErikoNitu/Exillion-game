@@ -5054,6 +5054,9 @@ position = Vector2(2145, -422)
 
 [node name="Enemies" type="Node" parent="."]
 
+[node name="Flying_fuck2" parent="Enemies" instance=ExtResource("26_r0ak0")]
+position = Vector2(-101, -266)
+
 [node name="Flying_fuck3" parent="Enemies" instance=ExtResource("26_r0ak0")]
 position = Vector2(-9, -692)
 
@@ -5075,18 +5078,23 @@ position = Vector2(1836, -691)
 
 [node name="Death" parent="." instance=ExtResource("27_r0ak0")]
 position = Vector2(-939, -413)
+shoot_cooldown = 1.5
 
 [node name="Death5" parent="." instance=ExtResource("27_r0ak0")]
-position = Vector2(-580, -412)
+position = Vector2(-677, -416)
+shoot_cooldown = 1.5
 
 [node name="Death2" parent="." instance=ExtResource("27_r0ak0")]
-position = Vector2(201, -558)
+position = Vector2(232, -563)
+shoot_cooldown = 1.5
 
 [node name="Death4" parent="." instance=ExtResource("27_r0ak0")]
 position = Vector2(1608, -318)
+shoot_cooldown = 1.5
 
 [node name="Death3" parent="." instance=ExtResource("27_r0ak0")]
 position = Vector2(1058, -316)
+shoot_cooldown = 1.5
 
 [connection signal="body_entered" from="Dialog/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Dialog/Area2D" to="." method="_on_area_2d_body_exited"]

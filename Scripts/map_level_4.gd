@@ -29,3 +29,11 @@ func _unhandled_input(event):
 			shop.visible = false
 			get_tree().paused = false
 			unpause_enemies()
+		elif event.keycode == KEY_2:
+			get_tree().change_scene_to_file("res://Scenes/map_level_2.tscn")
+		elif event.keycode == KEY_3:
+			get_tree().change_scene_to_file("res://Scenes/map_level_4.tscn")
+		elif event.keycode == KEY_1:
+			get_tree().change_scene_to_file("res://Scenes/map_level_1.tscn")
+		elif event.keycode == KEY_TAB:
+			get_tree().change_scene_to_file("res://Scenes/menu.tscn")

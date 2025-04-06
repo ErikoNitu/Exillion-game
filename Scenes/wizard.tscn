@@ -51,9 +51,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			animation_player.play(\"attack_melee_right\")
 		animated_sprite.play(\"bam\")
-	if Input.is_action_just_pressed(\"fire\") and currentHalth > 2 and Global.fireball == 1:
+	if Input.is_action_just_pressed(\"fire\") and currentHalth > 1 and Global.fireball == 1:
 		is_firing = true
-		currentHalth -= 2
+		currentHalth -= 1
 		healthChanged.emit(currentHalth)
 		animated_sprite.play(\"fire\")
 		shoot_projectile()
@@ -478,7 +478,7 @@ rotation = -0.523599
 position = Vector2(1, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Player_attack"]
-position = Vector2(-1, 38)
+position = Vector2(-1, 67)
 shape = SubResource("CircleShape2D_be21u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
