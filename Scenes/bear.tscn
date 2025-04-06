@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://c282vc3ro8agp"]
+
+[ext_resource type="Script" uid="uid://ca710oel13w4u" path="res://Scenes/bear.gd" id="1_qpjwo"]
+[ext_resource type="Texture2D" uid="uid://vlgcbs51mdbo" path="res://Assets/Bear/Light Brown Bear Sprite Sheet.png" id="1_ylc52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpjwo"]
+atlas = ExtResource("1_ylc52")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4or10"]
+atlas = ExtResource("1_ylc52")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2imu7"]
+atlas = ExtResource("1_ylc52")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_elcei"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpjwo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4or10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2imu7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mlyxe"]
+size = Vector2(23, 29)
+
+[node name="bear" type="Area2D"]
+position = Vector2(2, -1)
+script = ExtResource("1_qpjwo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-2, 1)
+sprite_frames = SubResource("SpriteFrames_elcei")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.0110501
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 2.5)
+shape = SubResource("RectangleShape2D_mlyxe")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

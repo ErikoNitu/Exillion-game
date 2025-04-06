@@ -1088,7 +1088,7 @@ shape = SubResource("RectangleShape2D_m8cta")
 
 [node name="Flying_fuck" parent="." instance=ExtResource("20_yibsj")]
 z_index = 1
-position = Vector2(-3, -76)
+position = Vector2(-340, -11)
 
 [node name="Flying_fuck2" parent="." instance=ExtResource("20_yibsj")]
 position = Vector2(1116, -326)
