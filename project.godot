@@ -17,8 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-BackgroundMusic="*res://Scenes/background_music.tscn"
 Global="*res://Global.gd"
+BackgroundMusic="*res://Scenes/background_music.tscn"
+
+[display]
+
+window/size/borderless=true
+window/stretch/mode="viewport"
 
 [input]
 
