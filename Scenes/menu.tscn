@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://jo2vjonycycr"]
+[gd_scene load_steps=5 format=3 uid="uid://jo2vjonycycr"]
 
 [ext_resource type="Script" uid="uid://c5uu0egxssjgt" path="res://Scripts/menu.gd" id="1_cayip"]
 [ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="2_158mb"]
 [ext_resource type="Texture2D" uid="uid://csjh1u5rmvahh" path="res://Assets/start_menu.png" id="3_wwsa2"]
+[ext_resource type="FontFile" uid="uid://c51o5cva5vphm" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="4_158mb"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -50,6 +51,18 @@ z_index = -1
 position = Vector2(576, 321)
 scale = Vector2(0.746745, 0.626953)
 texture = ExtResource("3_wwsa2")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 673.0
+offset_top = 469.0
+offset_right = 1048.0
+offset_bottom = 586.0
+theme_override_fonts/font = ExtResource("4_158mb")
+theme_override_font_sizes/font_size = 50
+text = "EXILLION"
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Story" to="." method="_on_story_pressed"]

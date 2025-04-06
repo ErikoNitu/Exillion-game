@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c282vc3ro8agp"]
+[gd_scene load_steps=8 format=3 uid="uid://cus06bjovca6x"]
 
 [ext_resource type="Script" uid="uid://ca710oel13w4u" path="res://Scenes/bear.gd" id="1_qpjwo"]
 [ext_resource type="Texture2D" uid="uid://vlgcbs51mdbo" path="res://Assets/Bear/Light Brown Bear Sprite Sheet.png" id="1_ylc52"]
@@ -33,7 +33,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mlyxe"]
-size = Vector2(23, 29)
+size = Vector2(104, 97)
 
 [node name="bear" type="Area2D"]
 position = Vector2(2, -1)
@@ -41,14 +41,15 @@ script = ExtResource("1_qpjwo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-2, 1)
+position = Vector2(36.5, 34)
+scale = Vector2(3.40625, 3.0625)
 sprite_frames = SubResource("SpriteFrames_elcei")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.0110501
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, 2.5)
+position = Vector2(39, 36.5)
 shape = SubResource("RectangleShape2D_mlyxe")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

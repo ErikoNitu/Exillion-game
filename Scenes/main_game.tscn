@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b3yhwlduw0piu" path="res://Assets/Final/Tiles.png" id="2_pu3va"]
 [ext_resource type="PackedScene" uid="uid://ky31t7rpcqmw" path="res://Scenes/death.tscn" id="3_0e3vx"]
 [ext_resource type="PackedScene" uid="uid://cfvyxqq7egilk" path="res://Scenes/health_container.tscn" id="4_6j5ir"]
-[ext_resource type="Script" path="res://Scripts/death-static.gd" id="6_18r40"]
+[ext_resource type="Script" uid="uid://cqmd72a65rvpg" path="res://Scripts/death-static.gd" id="6_18r40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0e3vx"]
 texture = ExtResource("2_pu3va")
