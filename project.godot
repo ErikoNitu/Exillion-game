@@ -10,11 +10,12 @@ config_version=5
 
 [application]
 
-config/name="joc"
+config/name="exillion"
 run/main_scene="uid://jo2vjonycycr"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/show_image=false
 boot_splash/fullsize=false
-config/icon="res://icon.svg"
+boot_splash/use_filter=false
 
 [autoload]
 
