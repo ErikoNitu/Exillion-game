@@ -21,13 +21,14 @@ const JUMP_VELOCITY = -500.0
 var energy_ball_scene: PackedScene = preload(\"res://Scenes/void.tscn\")
 
 @export var maxHealth = 10
-@onready var currentHalth: int = maxHealth
+@onready var currentHalth: int = 1
 
 var is_attacking = false
 var is_firing = false
 var stop_time = false
 
 func _ready():
+	Engine.time_scale = 1
 	animated_sprite.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
@@ -41,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_axis(\"move_left\", \"move_right\")
 	# Attack
-	if Input.is_action_just_pressed(\"attack_melee\") and not is_attacking and currentHalth > 1:
+	if Input.is_action_just_pressed(\"attack_melee\") and not is_attacking and currentHalth > 1 and Global.wand == 1:
 		is_attacking = true
 		currentHalth -= 1
 		healthChanged.emit(currentHalth)
@@ -50,13 +51,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			animation_player.play(\"attack_melee_right\")
 		animated_sprite.play(\"bam\")
-	if Input.is_action_just_pressed(\"fire\") and currentHalth > 2:
+	if Input.is_action_just_pressed(\"fire\") and currentHalth > 1 and Global.fireball == 1:
 		is_firing = true
-		currentHalth -= 2
+		currentHalth -= 1
 		healthChanged.emit(currentHalth)
 		animated_sprite.play(\"fire\")
 		shoot_projectile()
-	if Input.is_action_just_pressed(\"time_stop\") and currentHalth > 3:
+	if Input.is_action_just_pressed(\"time_stop\") and currentHalth > 3 and Global.time == 1:
 		Engine.time_scale = 0.5	
 		SPEED = 460
 		my_timer.wait_time = 2.0
@@ -477,7 +478,7 @@ rotation = -0.523599
 position = Vector2(1, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Player_attack"]
-position = Vector2(-1, 38)
+position = Vector2(-1, 67)
 shape = SubResource("CircleShape2D_be21u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

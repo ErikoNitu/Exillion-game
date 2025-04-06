@@ -6,6 +6,7 @@
 size = Vector2(51, 6)
 
 [node name="platforms" type="AnimatableBody2D"]
+process_mode = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://jo2vjonycycr"]
 
-[ext_resource type="Script" uid="uid://c5uu0egxssjgt" path="res://menu.gd" id="1_cayip"]
+[ext_resource type="Script" uid="uid://c5uu0egxssjgt" path="res://Scripts/menu.gd" id="1_cayip"]
 [ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="2_158mb"]
 [ext_resource type="Texture2D" uid="uid://csjh1u5rmvahh" path="res://Assets/start_menu.png" id="3_wwsa2"]
 
@@ -33,11 +33,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_158mb")
 text = "Start"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Story" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_158mb")
-text = "Options"
+text = "Story"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 texture_filter = 1
@@ -52,4 +52,5 @@ scale = Vector2(0.746745, 0.626953)
 texture = ExtResource("3_wwsa2")
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Story" to="." method="_on_story_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

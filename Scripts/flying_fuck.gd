@@ -34,10 +34,12 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = direction < 0
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
+	print("nume", area.name)
 	if area.name == "Player_attack" or area.name == "Void":
 		current_health -= 1
 		if current_health <= 0 and not is_dying:
 			die()
+		area.queue_free()
 
 func die() -> void:
 	is_dying = true
