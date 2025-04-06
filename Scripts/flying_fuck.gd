@@ -4,7 +4,7 @@ const SPEED: float = 300.0
 @export var patrol_distance: float = 200.0
 
 @onready var start_position: Vector2 = position
-@onready var current_health: int = 2
+@onready var current_health: int = 1
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area: Area2D = $DetectionArea
 
@@ -34,10 +34,12 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = direction < 0
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
+	print("nume", area.name)
 	if area.name == "Player_attack" or area.name == "Void":
 		current_health -= 1
 		if current_health <= 0 and not is_dying:
 			die()
+		area.queue_free()
 
 func die() -> void:
 	is_dying = true

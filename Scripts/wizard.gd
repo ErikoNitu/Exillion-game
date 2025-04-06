@@ -40,19 +40,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			animation_player.play("attack_melee_right")
 		animated_sprite.play("bam")
-	if Input.is_action_just_pressed("fire") and currentHalth > 2 and Global.fireball == 1:
+	if Input.is_action_just_pressed("fire") and currentHalth > 1 and Global.fireball == 1:
 		is_firing = true
-		currentHalth -= 2
+		currentHalth -= 1
 		healthChanged.emit(currentHalth)
 		animated_sprite.play("fire")
 		shoot_projectile()
-	if Input.is_action_just_pressed("time_stop") and currentHalth > 3 and Global.time == 1:
+	if Input.is_action_just_pressed("time_stop") and currentHalth > 2 and Global.time == 1:
 		Engine.time_scale = 0.5	
 		SPEED = 460
 		my_timer.wait_time = 2.0
 		my_timer.one_shot = true
 		my_timer.start()
-		currentHalth -= 3
+		currentHalth -= 2
 		healthChanged.emit(currentHalth)
 	elif not is_attacking and not is_firing:
 		# Only play other animations if not attacking

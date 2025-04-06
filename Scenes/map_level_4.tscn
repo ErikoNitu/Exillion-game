@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://v23motd5wi56"]
+[gd_scene load_steps=12 format=4 uid="uid://v23motd5wi56"]
 
 [ext_resource type="Script" uid="uid://cpc17i8x45mat" path="res://Scripts/map_level_4.gd" id="1_qlb56"]
 [ext_resource type="Texture2D" uid="uid://0t5xmrjt3lu4" path="res://Assets/Large 1024x1024/Purple Nebula/Purple_Nebula_07-1024x1024.png" id="1_w3vix"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bfla2nvpj35hc" path="res://Scenes/shop.tscn" id="5_gcin3"]
 [ext_resource type="PackedScene" uid="uid://cfvyxqq7egilk" path="res://Scenes/health_container.tscn" id="6_gcin3"]
 [ext_resource type="PackedScene" uid="uid://b0kqwvvvllhf3" path="res://Scenes/deathzone.tscn" id="7_xrncc"]
+[ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="8_og33r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gcin3"]
 texture = ExtResource("2_74jt8")
@@ -515,5 +516,14 @@ position = Vector2(-68, 139)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
 shape = SubResource("WorldBoundaryShape2D_og33r")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -204.0
+offset_top = -131.0
+offset_right = 232.0
+offset_bottom = -108.0
+theme_override_fonts/font = ExtResource("8_og33r")
+text = "Talk with the bear. He's friendly..."
 
 [connection signal="ready" from="Layer0" to="." method="_on_layer_0_ready"]

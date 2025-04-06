@@ -72,6 +72,15 @@ func _unhandled_input(event):
 			shop.visible = false
 			get_tree().paused = false
 			unpause_enemies()
+		elif event.keycode == KEY_2:
+			get_tree().change_scene_to_file(\"res://Scenes/map_level_2.tscn\")
+		elif event.keycode == KEY_3:
+			get_tree().change_scene_to_file(\"res://Scenes/map_level_4.tscn\")
+		elif event.keycode == KEY_1:
+			get_tree().change_scene_to_file(\"res://Scenes/map_level_1\")
+		elif event.keycode == KEY_TAB:
+			get_tree().change_scene_to_file(\"res://Scenes/menu.tscn\")
+		
 
 
 func _on_deathzone_area_entered(area: Area2D) -> void:
@@ -1013,6 +1022,20 @@ text = "Let the journey begin!"
 label_settings = SubResource("LabelSettings_6k85l")
 autowrap_mode = 1
 
+[node name="Label6" type="Label" parent="Labels"]
+modulate = Color(0.117647, 0.0705882, 0.12549, 1)
+self_modulate = Color(0.998383, 0.855626, 0.685211, 1)
+texture_filter = 1
+offset_left = 31.0
+offset_top = 135.0
+offset_right = 311.0
+offset_bottom = 158.0
+theme_override_fonts/font = ExtResource("15_djqc3")
+theme_override_font_sizes/font_size = 12
+text = "Save the vendor"
+label_settings = SubResource("LabelSettings_6k85l")
+autowrap_mode = 1
+
 [node name="Label3" type="Label" parent="Labels"]
 modulate = Color(0.117647, 0.0705882, 0.12549, 1)
 self_modulate = Color(0.998383, 0.855626, 0.685211, 1)
@@ -1126,20 +1149,29 @@ shape = SubResource("RectangleShape2D_m8cta")
 
 [node name="Flying_fuck" parent="Enemies" instance=ExtResource("20_yibsj")]
 z_index = 1
-position = Vector2(-1, -242)
+position = Vector2(-20, -205)
 
 [node name="Flying_fuck2" parent="Enemies" instance=ExtResource("20_yibsj")]
-position = Vector2(988, -334)
+position = Vector2(1017, -324)
 
 [node name="Flying_fuck3" parent="Enemies" instance=ExtResource("20_yibsj")]
 position = Vector2(2056, -182)
 
 [node name="Flying_fuck4" parent="Enemies" instance=ExtResource("20_yibsj")]
-position = Vector2(2777, 163)
+position = Vector2(3026, 231)
+
+[node name="Flying_fuck7" parent="Enemies" instance=ExtResource("20_yibsj")]
+position = Vector2(3119, -447)
+
+[node name="Flying_fuck6" parent="Enemies" instance=ExtResource("20_yibsj")]
+position = Vector2(2577, 234)
+
+[node name="Flying_fuck5" parent="Enemies" instance=ExtResource("20_yibsj")]
+position = Vector2(4017, 173)
 
 [node name="Wizard" parent="." instance=ExtResource("16_f0osq")]
 z_index = 1
-position = Vector2(2637, -361)
+position = Vector2(-438, -55)
 
 [node name="Shop" parent="." instance=ExtResource("22_mko6p")]
 process_mode = 3

@@ -23,7 +23,7 @@ var port: int = 4004
 
 
 func _ready() -> void:
-	Engine.time_scale = 2.0
+	#Engine.time_scale = 2.0
 	detection_area.area_entered.connect(_on_detection_area_body_entered)
 	shoot_timer.one_shot = false
 	shoot_timer.timeout.connect(_on_ShootTimer_timeout)
@@ -42,11 +42,17 @@ func _physics_process(delta: float) -> void:
 		position.x += direction * SPEED * delta
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
+	print("numeeeeeeeeeeeeeeeeeee", area.name)
 	if area.name == "Player_attack" or area.name == "Void":
 		current_health -= 1
+		print(current_health)
 		if current_health <= 0 and not is_dying:
 			die()
-
+		if area.name == "Void":
+			area.queue_free()
+		#rea.monitoring = false
+		#area.monitoring = true
+		
 func die() -> void:
 	is_dying = true
 	direction = 0
@@ -192,4 +198,4 @@ func generate_random_position_around(center: Vector2, radius: float = 100.0) -> 
 
 
 func _on_hurtbox_area_exited(area: Area2D) -> void:
-	pass # Replace with function body.
+	pass
