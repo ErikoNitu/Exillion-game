@@ -1,0 +1,201 @@
+[gd_scene load_steps=20 format=3 uid="uid://bfla2nvpj35hc"]
+
+[ext_resource type="Script" uid="uid://cwl5i5sm25oxq" path="res://Scripts/shop.gd" id="1_3ps1r"]
+[ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="1_a0mxf"]
+[ext_resource type="Texture2D" uid="uid://b8o8i84phryl4" path="res://Assets/energy_ball/ball.png" id="3_io27d"]
+[ext_resource type="FontFile" uid="uid://c51o5cva5vphm" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="4_fdj0q"]
+[ext_resource type="Texture2D" uid="uid://68b5cq0ry16s" path="res://Assets/wand.jpg" id="4_k6jq0"]
+[ext_resource type="Texture2D" uid="uid://c1y3xgq3mon71" path="res://Assets/ceas.jpg" id="5_3ps1r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdj0q"]
+atlas = ExtResource("3_io27d")
+region = Rect2(0, 0, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6jq0"]
+atlas = ExtResource("3_io27d")
+region = Rect2(99, 0, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ps1r"]
+atlas = ExtResource("3_io27d")
+region = Rect2(198, 0, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymrm4"]
+atlas = ExtResource("3_io27d")
+region = Rect2(0, 96, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8dlv"]
+atlas = ExtResource("3_io27d")
+region = Rect2(99, 96, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyrku"]
+atlas = ExtResource("3_io27d")
+region = Rect2(198, 96, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xp22"]
+atlas = ExtResource("3_io27d")
+region = Rect2(0, 192, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ow1eo"]
+atlas = ExtResource("3_io27d")
+region = Rect2(99, 192, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6pkm"]
+atlas = ExtResource("3_io27d")
+region = Rect2(198, 192, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sjcd"]
+atlas = ExtResource("4_k6jq0")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1cyt5"]
+atlas = ExtResource("5_3ps1r")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1sjcd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdj0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6jq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ps1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymrm4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8dlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyrku")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xp22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ow1eo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6pkm")
+}],
+"loop": true,
+"name": &"Magic Ball",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sjcd")
+}],
+"loop": true,
+"name": &"Magic Wand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1cyt5")
+}],
+"loop": true,
+"name": &"Time Stop",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1cyt5"]
+
+[node name="Shop" type="CanvasLayer"]
+offset = Vector2(0, -300)
+transform = Transform2D(1, 0, 0, 1, 0, -300)
+script = ExtResource("1_3ps1r")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 240.0
+offset_top = 118.0
+offset_right = 814.0
+offset_bottom = 417.0
+
+[node name="Close" type="Button" parent="."]
+texture_filter = 1
+offset_left = 694.0
+offset_top = 137.0
+offset_right = 800.0
+offset_bottom = 179.0
+theme_override_fonts/font = ExtResource("1_a0mxf")
+text = "CLOSE"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 5.0
+offset_bottom = 5.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control"]
+position = Vector2(476, 200)
+scale = Vector2(0.87, 0.79)
+sprite_frames = SubResource("SpriteFrames_1sjcd")
+animation = &"Time Stop"
+autoplay = "Magic Ball"
+centered = false
+
+[node name="Name" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 450.0
+offset_top = 150.0
+offset_right = 589.0
+offset_bottom = 195.0
+theme_override_fonts/font = ExtResource("1_a0mxf")
+text = "Name"
+label_settings = SubResource("LabelSettings_1cyt5")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 415.0
+offset_top = 308.0
+offset_right = 633.0
+offset_bottom = 352.0
+theme_override_fonts/font = ExtResource("1_a0mxf")
+text = "Description"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Next" type="Button" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 588.0
+offset_top = 225.0
+offset_right = 608.0
+offset_bottom = 256.0
+theme_override_fonts/font = ExtResource("4_fdj0q")
+text = ">"
+
+[node name="Prev" type="Button" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 430.0
+offset_top = 222.0
+offset_right = 450.0
+offset_bottom = 253.0
+theme_override_fonts/font = ExtResource("4_fdj0q")
+text = "<"
+
+[node name="Buy" type="Button" parent="Control"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 455.0
+offset_top = 376.0
+offset_right = 591.0
+offset_bottom = 407.0
+theme_override_fonts/font = ExtResource("4_fdj0q")
+text = "Purchase
+"
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]
+[connection signal="ready" from="Control/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_ready"]
+[connection signal="pressed" from="Control/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Control/Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="Control/Buy" to="." method="_on_buy_pressed"]

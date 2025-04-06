@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b8o656uon6iqp"]
 
-[ext_resource type="Script" uid="uid://b4gnx0f6iiorh" path="res://choices_dialog.gd" id="1_2l8fk"]
+[ext_resource type="Script" uid="uid://bb3pqg3fmsef5" path="res://Scenes/choices_dialog.gd" id="1_2l8fk"]
 [ext_resource type="FontFile" uid="uid://3amycqjqiuqm" path="res://Assets/fonts/PixelOperator8.ttf" id="2_wrvqf"]
 [ext_resource type="Texture2D" uid="uid://bi58ah3qb5xf" path="res://Assets/pixel-text-box.png" id="3_la44h"]
 
@@ -9,7 +9,7 @@ script/source = "extends Node2D
 
 @onready var choicesDialog: PanelContainer = $\"Choices Dialog\"
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	# Set the choices array using the setter
 	choicesDialog.set_choices([\"null\", \"The Ocean of Unknown\", \"End battle\"])  # Pass an Array to the setter
