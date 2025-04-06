@@ -33,11 +33,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_158mb")
 text = "Start"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Story" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_158mb")
-text = "Options"
+text = "Story"
 
 [node name="Quit" type="Button" parent="VBoxContainer"]
 texture_filter = 1
@@ -52,4 +52,5 @@ scale = Vector2(0.746745, 0.626953)
 texture = ExtResource("3_wwsa2")
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Story" to="." method="_on_story_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

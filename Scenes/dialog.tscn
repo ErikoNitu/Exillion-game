@@ -9,10 +9,10 @@ script/source = "extends Node2D
 
 @onready var choicesDialog: PanelContainer = $\"Choices Dialog\"
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	# Set the choices array using the setter
-	choicesDialog.set_choices([\"null\", \"Cave of death\", \"The Ocean of unknown\"])  # Pass an Array to the setter
+	choicesDialog.set_choices([\"null\", \"Cave of death\", \"The Ocean of unknown\"]) 
 	choicesDialog.visible = true
 
 func _process(delta: float) -> void:

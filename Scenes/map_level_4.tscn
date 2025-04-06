@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=4 uid="uid://v23motd5wi56"]
+[gd_scene load_steps=11 format=4 uid="uid://v23motd5wi56"]
 
-[ext_resource type="Script" uid="uid://cpc17i8x45mat" path="res://Scenes/map_level_4.gd" id="1_qlb56"]
+[ext_resource type="Script" uid="uid://cpc17i8x45mat" path="res://Scripts/map_level_4.gd" id="1_qlb56"]
 [ext_resource type="Texture2D" uid="uid://0t5xmrjt3lu4" path="res://Assets/Large 1024x1024/Purple Nebula/Purple_Nebula_07-1024x1024.png" id="1_w3vix"]
 [ext_resource type="Texture2D" uid="uid://dqme622xcr4a" path="res://Assets/oak_woods_tileset.png" id="2_74jt8"]
 [ext_resource type="PackedScene" uid="uid://lbtdso8tvltf" path="res://Scenes/wizard.tscn" id="3_qlb56"]
 [ext_resource type="PackedScene" uid="uid://bfla2nvpj35hc" path="res://Scenes/shop.tscn" id="5_gcin3"]
 [ext_resource type="PackedScene" uid="uid://cfvyxqq7egilk" path="res://Scenes/health_container.tscn" id="6_gcin3"]
+[ext_resource type="PackedScene" uid="uid://b0kqwvvvllhf3" path="res://Scenes/deathzone.tscn" id="7_xrncc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gcin3"]
 texture = ExtResource("2_74jt8")
@@ -446,6 +447,9 @@ tile_size = Vector2i(24, 24)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_gcin3")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_og33r"]
+distance = -183.0
+
 [node name="map_level_4" type="Node2D"]
 script = ExtResource("1_qlb56")
 
@@ -457,16 +461,34 @@ texture_filter = 1
 position = Vector2(-1017, 0)
 texture = ExtResource("1_w3vix")
 
+[node name="PurpleNebula07-1024x1027" type="Sprite2D" parent="Backgrounds"]
+z_index = -1
+texture_filter = 1
+position = Vector2(-1017, 1024)
+texture = ExtResource("1_w3vix")
+
 [node name="PurpleNebula07-1024x1025" type="Sprite2D" parent="Backgrounds"]
 z_index = -1
 texture_filter = 1
 position = Vector2(1026, -2)
 texture = ExtResource("1_w3vix")
 
+[node name="PurpleNebula07-1024x1029" type="Sprite2D" parent="Backgrounds"]
+z_index = -1
+texture_filter = 1
+position = Vector2(1028, 1020)
+texture = ExtResource("1_w3vix")
+
 [node name="PurpleNebula07-1024x1024" type="Sprite2D" parent="Backgrounds"]
 z_index = -1
 texture_filter = 1
 position = Vector2(2, 0)
+texture = ExtResource("1_w3vix")
+
+[node name="PurpleNebula07-1024x1028" type="Sprite2D" parent="Backgrounds"]
+z_index = -1
+texture_filter = 1
+position = Vector2(5, 1023)
 texture = ExtResource("1_w3vix")
 
 [node name="Layer0" type="TileMapLayer" parent="."]
@@ -487,5 +509,11 @@ offset_bottom = 46.0
 visible = false
 offset = Vector2(15, 40)
 transform = Transform2D(1, 0, 0, 1, 15, 40)
+
+[node name="deathzone" parent="." instance=ExtResource("7_xrncc")]
+position = Vector2(-68, 139)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deathzone"]
+shape = SubResource("WorldBoundaryShape2D_og33r")
 
 [connection signal="ready" from="Layer0" to="." method="_on_layer_0_ready"]

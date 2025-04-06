@@ -195,6 +195,7 @@ height = 60.0
 radius = 199.04
 
 [node name="Flying_fuck" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_sy3ij")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

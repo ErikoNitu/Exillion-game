@@ -1127,15 +1127,23 @@ shape = SubResource("RectangleShape2D_m8cta")
 [node name="Flying_fuck" parent="Enemies" instance=ExtResource("20_yibsj")]
 z_index = 1
 position = Vector2(-1, -242)
+patrol_distance = 200.0
+shoot_cooldown = 1.5
 
 [node name="Flying_fuck2" parent="Enemies" instance=ExtResource("20_yibsj")]
 position = Vector2(988, -334)
+patrol_distance = 200.0
+shoot_cooldown = 1.5
 
 [node name="Flying_fuck3" parent="Enemies" instance=ExtResource("20_yibsj")]
 position = Vector2(2056, -182)
+patrol_distance = 200.0
+shoot_cooldown = 1.5
 
 [node name="Flying_fuck4" parent="Enemies" instance=ExtResource("20_yibsj")]
 position = Vector2(2777, 163)
+patrol_distance = 200.0
+shoot_cooldown = 1.5
 
 [node name="Wizard" parent="." instance=ExtResource("16_f0osq")]
 z_index = 1

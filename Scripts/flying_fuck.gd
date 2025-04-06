@@ -4,7 +4,7 @@ const SPEED: float = 300.0
 @export var patrol_distance: float = 200.0
 
 @onready var start_position: Vector2 = position
-@onready var current_health: int = 1
+@onready var current_health: int = 2
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area: Area2D = $DetectionArea
 
