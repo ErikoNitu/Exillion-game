@@ -129,8 +129,10 @@ func shoot_projectile() -> void:
 		
 		# Wait briefly to allow the server to respond
 		# (In a real-time game you might run this in a coroutine or check repeatedly)
+		var start_time = Time.get_ticks_msec()
+		#print("time", start_time)
 		var available = client.get_available_bytes()
-		while available == 0:
+		while available == 0 and Time.get_ticks_msec() - start_time < 1000:
 			available = client.get_available_bytes()
 		if available > 0:
 			var received_str = client.get_utf8_string(available)

@@ -112,61 +112,8 @@ func shoot_projectile() -> void:
 		var base_dir = Vector2(0, -1)# (player.global_position - global_position).normalized()
 		var correct_dir = (player.global_position - global_position).normalized()
 
-		# Prepare a dictionary with the info you want to send to Python
-		var state = {
-			"projectile_direction": [correct_dir.x, correct_dir.y],
-			"player_position": [player.global_position.x, player.global_position.y],
-			"enemy_position": [global_position.x, global_position.y]
-		}
-		var state_json = JSON.stringify(state) + "\n"
-		var bytes = state_json.to_utf8_buffer()
-		
-		# Send the state to Python
-		client.poll()
-		var put_err = client.put_data(bytes)
-		if put_err != OK:
-			print("put_data error: ", put_err)
-		
-		# Wait briefly to allow the server to respond
-		# (In a real-time game you might run this in a coroutine or check repeatedly)
-		var start_time = Time.get_ticks_msec()
-		#print("time", start_time)
-		var available = client.get_available_bytes()
-		while available == 0 and Time.get_ticks_msec() - start_time < 1000:
-			available = client.get_available_bytes()
-		if available > 0:
-			var received_str = client.get_utf8_string(available)
-			# We assume the response ends with a newline
-			var newline_index = received_str.find("\n")
-			if newline_index != -1:
-				var line = received_str.substr(0, newline_index)
-				var json_parser = JSON.new()
-				var parse_error = json_parser.parse(line)
-				if parse_error == OK:
-					var response = json_parser.data
-					if response.has("projectile_direction"):
-						var pred = response["projectile_direction"]
-						var predicted_dir = Vector2(pred[0], pred[1])
-						# Use the predicted direction from Python for the projectile
-						projectile.direction = predicted_dir.normalized()
-						print("Updated projectile direction from Python:", projectile.direction)
-					else:
-						# Fallback: use the base direction
-						projectile.direction = base_dir
-						print("No projectile_direction in response; using base direction")
-				else:
-					print("Error parsing response JSON:", parse_error)
-					projectile.direction = base_dir
-			else:
-				print("not here?")
-				# No complete message yet; fallback to base direction
-				projectile.direction = base_dir
-		else:
-			print("not available yet")
-			# If no response is available, use the base direction
-			projectile.direction = base_dir
+		projectile.direction = base_dir
 			
-	client.disconnect_from_host()
 
 func generate_random_direction() -> Vector2:
 	# Generate a random angle in radians between 0 and 2π
