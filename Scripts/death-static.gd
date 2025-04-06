@@ -1,6 +1,6 @@
 extends Node2D
 
-const SPEED: float = 50.0
+const SPEED: float = 0.0
 
 @onready var current_health: int = 3
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
